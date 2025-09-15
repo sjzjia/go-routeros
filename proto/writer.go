@@ -25,7 +25,7 @@ type writer struct {
 
 // NewWriter returns a new Writer to write to w.
 func NewWriter(w io.Writer) Writer {
-	return &writer{ctxWriter: &ctxWriter{Writer: bufio.NewWriter(w), done: make(chan struct{})}}
+	return &writer{ctxWriter: &ctxWriter{Writer: bufio.NewWriterSize(w, 10*1024*1024), done: make(chan struct{})}} // 10MB缓冲区
 }
 
 // BeginSentence prepares w for writing a sentence.
