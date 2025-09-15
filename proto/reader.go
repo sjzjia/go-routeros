@@ -21,7 +21,7 @@ type reader struct {
 // NewReader returns a new Reader to read from r.
 func NewReader(r io.Reader) Reader {
 	return &reader{
-		ctxReader: &ctxReader{Reader: bufio.NewReader(r), done: make(chan struct{})},
+		ctxReader: &ctxReader{Reader: bufio.NewReaderSize(r, 10*1024*1024), done: make(chan struct{})}, // 10MB缓冲区
 	}
 }
 
